@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div id = 'container'>
+        <div id = 'formContainer'>
+            <form method="POST">
+                {% csrf_token %}
+                {{form.tasks}}
+                <button id = 'add' type = 'submit'>add</button>
+            </form>
+        </div>
+        <div id = 'todoItems'>
+            {% for todo in tasks %}
+                <div class = 'item'>
+                    <p>{{todo.tasks}}</p>
+                    <div class = 'controls'>
+                        <a href = "{% url 'updateItem' todo.id %}"><button class = 'edit'>Edit</button></a>
+                        <a href = "{% url 'deleteItem' todo.id %}"><button class = 'delete'>Delete</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
+
